@@ -2,6 +2,10 @@ package ejercicio2Mediator;
 
 public class ConcreteMediator implements IMediator {
 
+	public ConcreteMediator() {
+		super();
+	}
+
 	public Estudiantes estudiante;
 	public Docentes docente;
 	public Administrativos administrativo;
@@ -33,11 +37,22 @@ public class ConcreteMediator implements IMediator {
 	@Override
 	public void send(String message, Colleague colleague) {
 		if (colleague == estudiante) {
-			estudiante.messageReceived(message);
+			if (estudiante.getDestinatario() == "docentes") {
+				docente.messageReceived(message);
+			} else if (estudiante.getDestinatario() == "administrativos") {
+				administrativo.messageReceived(message);
+			} else {
+				docente.messageReceived(message);
+				administrativo.messageReceived(message);
+				estudiante.messageReceived(message);
+			}
 		} else if (colleague == docente) {
 			docente.messageReceived(message);
+			estudiante.messageReceived(message);
 		} else {
+			docente.messageReceived(message);
 			administrativo.messageReceived(message);
+			estudiante.messageReceived(message);
 		}
 	}
 

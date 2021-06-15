@@ -8,8 +8,29 @@ package ejercicio2Mediator;
 
 public class Cliente {
 
-	ConcreteMediator mediator = new ConcreteMediator();
+	public static void main(String[] arg) {
+		ConcreteMediator mediator = new ConcreteMediator();
 
-	Estudiantes estudiante = new Estudiantes(mediator, "51231", "Ignacio");
+		Estudiantes estudiante = new Estudiantes(mediator, "51231", "Ignacio");
+
+		estudiante.setDestinatario("docentes");
+
+		Docentes docente = new Docentes(mediator, "10926845", "Ignacio");
+
+		Administrativos admin = new Administrativos(mediator, "Jorge", "Secretario");
+
+		mediator.setEstudiente(estudiante);
+		mediator.setAdministrativo(admin);
+		mediator.setDocente(docente);
+
+		estudiante.send("Hola, soy un estudiante y este mensaje es para los docentes");
+		estudiante.setDestinatario("administrativos");
+		estudiante.send("Hola, soy un estudiante y este mensaje es para los administrativos");
+		System.out.println();
+		docente.send("Hola soy un docente");
+		System.out.println();
+		admin.send("Hola soy un administrativo");
+
+	}
 
 }

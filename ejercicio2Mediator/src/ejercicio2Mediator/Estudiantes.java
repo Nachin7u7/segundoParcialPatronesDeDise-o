@@ -8,7 +8,15 @@ public class Estudiantes extends Colleague {
 		this.nombre = nombre;
 	}
 
-	String numeroMatricula, nombre;
+	String numeroMatricula, nombre, destinatario;
+
+	public String getDestinatario() {
+		return destinatario;
+	}
+
+	public void setDestinatario(String destinatario) {
+		this.destinatario = destinatario;
+	}
 
 	@Override
 	public void send(String message) {
